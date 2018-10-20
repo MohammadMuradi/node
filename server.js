@@ -1,6 +1,7 @@
 const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
+var port = process.env.PORT || 3000; //get the port set to heroku from command line or set it to 3000 if it doesn't exist
 
 var app= express();
 
@@ -20,9 +21,9 @@ app.use(function (req,res,next){                 //Express Midleware
   next();
 });
 
-app.use(function (req,res,next){                 //Express Midleware
-  res.render('maintenance.hbs');                 //no next here, so the below lines of code will be ignored
-});                                              //maintenance and the above log are only executed
+//app.use(function (req,res,next){                 //Express Midleware
+//  res.render('maintenance.hbs');                 //no next here, so the below lines of code will be ignored
+//});                                              //maintenance and the above log are only executed
 
 app.use(express.static(__dirname+'/public'));     //we can use help.html now
 
@@ -67,6 +68,6 @@ app.get('/bad', function(req,res){
   });
 });
 
-app.listen(3000,function(){
-  console.log('Server is on on port 3000');
+app.listen(port,function(){
+  console.log(`Server is on on port ${port}`);
 });
